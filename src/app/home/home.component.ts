@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from "../http.service";
+
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  brews: Object;
 
-  ngOnInit(): void {
+  constructor(private _http:HttpService) { }
+
+  // Whatever is written within ngOnInit runs when the component is loaded
+  ngOnInit() {
+    this._http.myMethod();
+    this._http.getBeer().subscribe(
+      data => {
+        this.brews = data
+        console.log(this.brews);
+      }
+    )
   }
 
 }
